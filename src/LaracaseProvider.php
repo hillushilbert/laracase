@@ -51,9 +51,6 @@ class LaracaseProvider extends BaseServiceProvider
         $this->loadViews();
         $this->loadConfig();
         $this->registerCommands();
-        $this->registerViewComposers($view);
-        $this->registerMenu($events, $config);
-        $this->loadComponents();
         $this->loadRoutes();
     }
 
