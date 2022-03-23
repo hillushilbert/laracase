@@ -2,6 +2,17 @@
 
 namespace Hillus\Laracase;
 
+use Hillus\Laracase\Commands\CrudApiCommand;
+use Hillus\Laracase\Commands\CrudApiControllerCommand;
+use Hillus\Laracase\Commands\CrudCommand;
+use Hillus\Laracase\Commands\CrudControllerCommand;
+use Hillus\Laracase\Commands\CrudLangCommand;
+use Hillus\Laracase\Commands\CrudMigrationCommand;
+use Hillus\Laracase\Commands\CrudModelCommand;
+use Hillus\Laracase\Commands\CrudViewCommand;
+use Hillus\Laracase\Commands\GridCommand;
+use Hillus\Laracase\Commands\GridControllerCommand;
+use Hillus\Laracase\Commands\GridViewCommand;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
