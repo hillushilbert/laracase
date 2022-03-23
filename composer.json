@@ -23,7 +23,7 @@
         },
         "laravel": {
             "providers": [
-                "Hillus\\Laracase\\ServiceProvider"
+                "Hillus\\Laracase\\LaracaseProvider"
             ],
             "aliases": {
                 "PDF": "Hillus\\Laracase\\Facade\\Pdf"
