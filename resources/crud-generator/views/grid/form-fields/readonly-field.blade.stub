@@ -1,0 +1,4 @@
+<input class="form-control" name="%%itemName%%" type="hidden" id="%%itemName%%" value="{{ isset($%%crudNameSingular%%->%%itemName%%) ? $%%crudNameSingular%%->%%itemName%% : old('%%itemName%%')}}">
+<span class="readonly">
+{{ isset($%%crudNameSingular%%->%%itemName%%) ? $%%crudNameSingular%%->%%itemName%% : old('%%itemName%%')}}
+</span>

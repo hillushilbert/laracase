@@ -1,0 +1,183 @@
+@extends('adminlte::page')
+
+@section('title', '%%crudNameCap%%')
+
+
+@section('adminlte_css')
+@parent
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
+@endsection
+
+
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+						<h3 class="box-title">%%crudNameCap%%</h3>
+					</div>
+                    <div class="card-body">
+						<!--
+						<button class="btn btn-success btn-sm new-%%crudName%%" type="button" data-toggle="modal" data-target="#modal%%crudName%%">
+							<i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+						</button>	
+						-->
+                        @if ($errors->any())
+                            <ul class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif						
+						
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="gridDataTable">
+                                <thead>
+                                    <tr>
+                                        %%formHeadingHtml%%
+										<th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- modal form -->
+	<div class="modal fade" id="modal%%crudName%%" tabindex="-1" role="dialog" aria-labelledby="#modal_%%crudName%%Label" aria-hidden="true">
+		<form method="POST" name="form_%%crudName%%" id="form_%%crudName%%" action="{{ url('/%%routeGroup%%%%viewName%%') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data" data-action="" data-id="">
+        @csrf
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Criar Novo %%modelName%%
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						
+						</button>	
+					</h5>		
+				</div>
+				<div class="modal-body">
+					<!-- campos do formulario -->
+					@include ('%%viewTemplateDir%%.form', ['formMode' => 'create'])
+					<!-- fim dos campos do formulario -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" id="btnConfirmar" class="btn btn-primary">Confimar</button>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- end modal form -->
+	<form method="POST" action="/%%routeGroup%%%%viewName%%/" id="FDelete_%%crudName%%" accept-charset="UTF-8" style="display:inline">
+	    {{ method_field('DELETE') }}
+	    {{ csrf_field() }} 
+	</form>	
+	
+@endsection
+
+
+@section('adminlte_js')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+
+<script>
+
+	$(document).ready(function() {
+		/*
+		$('#gridDataTable_length').prepend('<button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#modaldistribuidores">'+
+											' <i class="fa fa-plus" aria-hidden="true"></i> Adicionar'+
+						'</button>');
+		*/
+		$('div.dt-buttons').addClass('dataTables_length');
+		$('div.dt-buttons button').addClass('btn');	
+		$('div.dt-buttons button').addClass('btn-sm btn-success');			
+	});
+	var table = $('#gridDataTable').DataTable( {
+			"processing": true,
+			"serverSide": true,
+			"paging": true,
+			"dom": '<"top"i>rt<"bottom"flp><"clear">',	
+			"ajax": "/%%routeGroup%%%%viewName%%/ajax",
+			%%datatableColumns%%
+			%%buttonsJsonOption%%
+			"columnDefs": [ {
+				"targets": %%datatableColumnsCount%%,
+				"data": function ( d ) {
+					console.debug(d);
+					return 	'<div class="btn-group" role="group">'+
+							'	<button type="button" class="btn btn-primary btn-sm edit-%%crudName%%" data-toggle="modal" data-target="#modal%%crudName%%" data-id="'+d.%%primaryKey%%+'" onclick="edit_%%crudName%%(this)" title="Editar"><i class="fas fa-pencil-alt"></i> </button>'+				
+							'	<button type="button" class="btn btn-danger btn-sm edit-%%crudName%%" onclick="delete_%%crudName%%_form(this)" data-id="'+d.%%primaryKey%%+'"><i class="fas fa-trash-alt" aria-hidden="true" title="Remover"></i> </button>'+				
+							'</div>';
+				},
+				"width":50,
+				"defaultContent": '---'
+			} ],
+			"language": {
+				  "emptyTable": "Nenhum registro encontrado",
+				  "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				  "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+				  "infoFiltered": "(Filtrados de _MAX_ registros)",
+				  "infoPostFix": "",
+				  "infoThousands": ".",
+				  "lengthMenu": "_MENU_ resultados por página",
+				  "loadingRecords": "Carregando...",
+				  "processing": "Processando...",
+				  "zeroRecords": "Nenhum registro encontrado",
+				  "search": "Pesquisar",
+				  "oPaginate": {
+					  "sNext": "Próximo",
+					  "sPrevious": "Anterior",
+					  "sFirst": "Primeiro",
+					  "sLast": "Último"
+				  },
+			}			
+			
+			
+			
+		} );
+		
+		var registro = null;
+
+		%%formModalJs%%
+		
+		$('button.new-%%crudName%%').click(function(){
+			var f = document.getElementById('form_%%crudName%%');
+			console.log(f);
+			resetForm();
+			// preenche os campos do form com os dados do registro
+			$('#form_%%crudName%%').attr('data-action','create');	
+		});
+
+		function edit_%%crudName%%(e){
+			var id = e.getAttribute('data-id');
+			loadForm(id);
+			$('#form_%%crudName%%').attr('data-action','edit');
+			$('#form_%%crudName%%').attr('data-id',id);
+		}
+		
+		function delete_%%crudName%%_form(e)
+		{
+			var id = e.getAttribute('data-id');
+			var url = '/%%routeGroup%%%%viewName%%/'+id; 
+			$('#FDelete_%%crudName%%').attr('action',url);
+			$('#FDelete_%%crudName%%').submit();
+		}
+
+		
+	//} );
+
+
+</script>
+@endsection

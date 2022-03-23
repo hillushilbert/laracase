@@ -1,0 +1,140 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceHttp\Requests;
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
+use Illuminate\Http\Request;
+
+class DummyClass extends Controller
+{
+    public function __construct(){
+		{{middlewareAuth}}
+	}
+	
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $keyword = $request->get('search');
+        $perPage = {{pagination}};
+
+        if (!empty($keyword)) {
+            ${{crudName}} = {{modelName}}::{{whereSnippet}}paginate($perPage);
+        } else {
+            ${{crudName}} = {{modelName}}::paginate($perPage);
+        }
+		
+        return view('{{viewPath}}{{viewName}}.index', compact('{{crudName}}'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+		$modo = 'create'; 
+        {{lookups}}
+		return view('{{viewPath}}{{viewName}}.create',compact('modo'{{compactLookups}}));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(Request $request)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{fileSnippet}}
+        {{createAt}}
+        {{updateAt}}
+        {{modelName}}::create($requestData);
+        
+        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} adicionado!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+		{{lookups}}
+        return view('{{viewPath}}{{viewName}}.show', compact('{{crudNameSingular}}'{{compactLookups}}));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+		{{lookups}}
+        return view('{{viewPath}}{{viewName}}.edit', compact('{{crudNameSingular}}'{{compactLookups}}));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{updateAt}}
+        {{fileSnippet}}
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+        ${{crudNameSingular}}->update($requestData);
+        
+
+        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} atualizado!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy($id)
+    {
+	
+	    try
+		{
+			{{modelName}}::destroy($id);
+			
+			return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} removido!');
+		
+		}
+		catch(\Exception $e)
+		{
+			//if email or phone exist before in db redirect with error messages
+            return redirect()->back()->withErrors([$e->getMessage()]);
+        }
+	
+	}
+}

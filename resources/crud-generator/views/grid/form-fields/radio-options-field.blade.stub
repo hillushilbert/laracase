@@ -1,0 +1,5 @@
+<div class="form-check form-check-inline">
+	<input name="%%itemName%%" id="%%itemName%%" type="radio" value="%%optionKey%%" {{ ((isset($%%crudNameSingular%%) && '%%optionKey%%' == $%%crudNameSingular%%->%%itemName%%) || old('%%itemName%%') == '%%optionKey%%') ? 'checked' : '' }} class="form-check-input {{ $errors->has('%%itemName%%') ? 'is-invalid' : ''}}">
+    <label class="form-check-label" for="%%itemName%%_%%optionKey%%">%%optionValue%%</label>
+	%%lastItem%%
+</div>

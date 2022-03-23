@@ -1,0 +1,27 @@
+%%formFieldsHtml%%
+
+<div class="box-footer no-padding">
+    <div class="mailbox-controls">
+        <div class="btn-group">
+            <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Atualizar' : 'Inserir' }}">
+        </div>
+        <div class="float-right">
+        </div>
+        <!-- /.pull-right -->
+    </div>
+</div>
+
+
+@section('js')
+<script>
+function edit_select(campo,modelo){
+    modelo = modelo.substring(1);
+    var id = '#sel_'+campo;
+    if($(id).val() != '' && $(id).val() != undefined){
+        var url = '/admin/'+modelo+'/'+$(id).val()+'/edit';
+        console.log(campo+ ' - '+ modelo + " - " + url);
+        window.location = url;
+    }
+}
+</script>
+@endsection

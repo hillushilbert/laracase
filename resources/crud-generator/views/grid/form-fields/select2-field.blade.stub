@@ -1,0 +1,9 @@
+<select name="%%itemName%%" class="form-control {{ $errors->has('%%itemName%%') ? 'is-invalid' : ''}}" id="%%itemName%%" %%required%% %%readonly%%>
+    <option value=""></option>
+	@foreach (%%variavel%% as $record)
+        <option value="{{ $record->%%id%% }}" {{ ((isset($%%crudNameSingular%%->%%itemName%%) && $%%crudNameSingular%%->%%itemName%% == $record->%%id%%) || old('%%itemName%%') == $record->%%id%%) ? 'selected' : ''}}>{{ $record->%%descricao%% }}</option>
+    @endforeach
+</select>
+<a href="#" onclick="edit_select('%%itemName%%','%%variavel%%')" class="btn btn-info btn-sm">
+    <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editar
+</a>

@@ -1,0 +1,160 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceHttp\Requests;
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
+use Illuminate\Http\Request;
+
+class DummyClass extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+		
+        ${{crudName}} = {{modelName}}::paginate({{pagination}});
+
+        return ${{crudName}};
+    }
+
+    /**
+     * save
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return Eloquent
+     */
+	protected function save(Request $request){
+		
+		${{crudNameSingular}} = {{modelName}}::find($request->{{primaryKey}});
+		if(!empty(${{crudNameSingular}})){
+			${{crudNameSingular}}->update($request->all());		
+		}else{
+			${{crudNameSingular}} = {{modelName}}::create($request->all());
+		}
+		
+		return ${{crudNameSingular}};
+	}
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+		try
+		{	
+			{{validationRules}}
+			
+			${{crudNameSingular}} = $this->save($request);
+
+			return response()->json(['data'=>${{crudNameSingular}}], 201);
+		}
+		catch(\Illuminate\Database\QueryException $e){
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."| ".$e->getSql(). ' binding: '.json_encode($e->getBindings()));
+			return response()->json(['errors'=>$e->getMessage(),'sql'=>$e->getSql(),'binding'=>$e->getBindings()], 401);
+		}
+        catch(\Illuminate\Validation\ValidationException $e){
+            \App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."|".json_encode($e->errors()));
+			return response()->json(['errors'=>$e->errors()], 422);
+		}
+        catch (\Exception $e) {
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage());
+            return response()->json(['errors'=>[$e->getMessage()]], 401);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+		try
+		{
+			${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+
+			return response()->json(['data'=>${{crudNameSingular}}],200);
+		}
+		catch(\Illuminate\Validation\ValidationException $e){
+			return response()->json(['errors'=>$e->errors()], 422);
+		}
+		catch(\Exception $e){
+			return response()->json(['errors'=>[$e->getMessage()]], 422);
+		}
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+		try
+		{
+			{{validationRules}}
+			
+			${{crudNameSingular}} = $this->save($request);
+
+			return response()->json(['data'=>${{crudNameSingular}}], 200);
+		}
+		catch(\Illuminate\Database\QueryException $e){
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."| ".$e->getSql(). ' binding: '.json_encode($e->getBindings()));
+			return response()->json(['errors'=>$e->getMessage(),'sql'=>$e->getSql(),'binding'=>$e->getBindings()], 401);
+		}
+        catch(\Illuminate\Validation\ValidationException $e){
+            \App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."|".json_encode($e->errors()));
+			return response()->json(['errors'=>$e->errors()], 422);
+		}
+        catch (\Exception $e) {
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage());
+            return response()->json(['errors'=>[$e->getMessage()]], 401);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request,$id)
+    {
+        try
+		{
+			{{modelName}}::destroy($id);
+
+			return response()->json(['data'=>"record removed"], 204);
+		}
+		catch(\Illuminate\Database\QueryException $e){
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."| ".$e->getSql(). ' binding: '.json_encode($e->getBindings()));
+			return response()->json(['errors'=>$e->getMessage(),'sql'=>$e->getSql(),'binding'=>$e->getBindings()], 401);
+		}
+        catch(\Illuminate\Validation\ValidationException $e){
+            \App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage()."|".json_encode($e->errors()));
+			return response()->json(['errors'=>$e->errors()], 422);
+		}
+        catch (\Exception $e) {
+			\App\Http\Resources\Api::saveLog($request,__METHOD__,$e->getMessage());
+            return response()->json(['errors'=>[$e->getMessage()]], 401);
+        }
+    }
+}

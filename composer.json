@@ -1,0 +1,33 @@
+{
+    "name": "hillus/laracase",
+    "description": "Gerador de crud para laravel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hillus\\Laracase\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hillus Hilbert",
+            "email": "hillus.hilbert@codding.com.br"
+        }
+    ],
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "illuminate/support": "^6|^7|^8|^9"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Hillus\\Laracase\\ServiceProvider"
+            ],
+            "aliases": {
+                "PDF": "Hillus\\Laracase\\Facade\\Pdf"
+            }
+        }
+    }
+}
