@@ -26,11 +26,9 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ route('laracase.crud.new') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('laracase.crud.blade.storage') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
-
                             @include ('laracase::crud.form.form', ['formMode' => 'create'])
-
                         </form>
 
                     </div>
@@ -39,9 +37,6 @@
         </div>
     </div>
 	
-	<!-- Modal extra grande -->
-	<button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Modal extra grande</button>
-
 	<div id="meuModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-xl">
 		<div class="modal-content">
