@@ -260,12 +260,12 @@ class CrudViewCommand extends Command
     {
         parent::__construct();
 
-        if (config('crudgenerator.view_columns_number')) {
-            $this->defaultColumnsToShow = config('crudgenerator.view_columns_number');
+        if (config('laracase.view_columns_number')) {
+            $this->defaultColumnsToShow = config('laracase.view_columns_number');
         }
 
-        $this->delimiter = config('crudgenerator.custom_delimiter')
-            ? config('crudgenerator.custom_delimiter')
+        $this->delimiter = config('laracase.custom_delimiter')
+            ? config('laracase.custom_delimiter')
             : ['%%', '%%'];
     }
 
@@ -277,9 +277,9 @@ class CrudViewCommand extends Command
     public function handle()
     {
         $formHelper = $this->option('form-helper');
-        $this->viewDirectoryPath = config('crudgenerator.custom_template')
-            ? config('crudgenerator.path') . 'views/' . $formHelper . '/'
-            : __DIR__ . '/../stubs/views/' . $formHelper . '/';
+        $this->viewDirectoryPath = config('laracase.custom_template')
+            ? config('laracase.path') . 'views/' . $formHelper . '/'
+            : __DIR__ . '/../../resources/stubs/views/' . $formHelper . '/';
 
 
         $this->crudName = strtolower($this->argument('name'));
@@ -471,8 +471,8 @@ class CrudViewCommand extends Command
      */
     protected function templateStubs($path)
     {
-        $dynamicViewTemplate = config('crudgenerator.dynamic_view_template')
-            ? config('crudgenerator.dynamic_view_template')
+        $dynamicViewTemplate = config('laracase.dynamic_view_template')
+            ? config('laracase.dynamic_view_template')
             : $this->defaultTemplating();
 
         foreach ($dynamicViewTemplate as $name => $vars) {

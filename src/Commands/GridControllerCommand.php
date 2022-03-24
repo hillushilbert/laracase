@@ -48,9 +48,9 @@ class GridControllerCommand extends AbstractControllerCommand
      */
     protected function getStub()
     {
-        return config('crudgenerator.custom_template')
-        ? config('crudgenerator.path') . '/controllerGrid.stub'
-        : __DIR__ . '/../stubs/controllerGrid.stub';
+        return config('laracase.custom_template')
+        ? config('laracase.path') . '/controllerGrid.stub'
+        : __DIR__ . '/../../resources/stubs/controllerGrid.stub';
     }
 
 

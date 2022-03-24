@@ -41,11 +41,10 @@ class CrudModelCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-   		dump(__METHOD__);
-
-		return config('crudgenerator.custom_template')
-        ? config('crudgenerator.path') . '/model.stub'
-        : __DIR__ . '/../stubs/model.stub';
+   	
+		return config('laracase.custom_template')
+        ? config('laracase.path') . '/model.stub'
+        : __DIR__ . '/../../resources/stubs/model.stub';
     }
 
     /**
@@ -68,7 +67,6 @@ class CrudModelCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-		dump(__METHOD__);
 		$stub = $this->files->get($this->getStub());
 
         $table = $this->option('table') ? $table = $this->option('table') : $this->argument('name');
@@ -137,8 +135,7 @@ EOD;
      */
     protected function replaceTable(&$stub, $table)
     {
-		dump("entrou em replaceTable ".$table);
-        $stub = str_replace('{{table}}', $table, $stub);
+		$stub = str_replace('{{table}}', $table, $stub);
 
         return $this;
     }
@@ -168,8 +165,7 @@ EOD;
      */
     protected function replacePrimaryKey(&$stub, $primaryKey)
     {
-      	dump(__METHOD__);
-		$stub = str_replace('{{primaryKey}}', $primaryKey, $stub);
+      	$stub = str_replace('{{primaryKey}}', $primaryKey, $stub);
 
         return $this;
     }
@@ -184,8 +180,7 @@ EOD;
      */
     protected function replaceSoftDelete(&$stub, $replaceSoftDelete)
     {
-   		dump(__METHOD__);
-		if ($replaceSoftDelete == 'yes') {
+   		if ($replaceSoftDelete == 'yes') {
             $stub = str_replace('{{softDeletes}}', "use SoftDeletes;\n    ", $stub);
             $stub = str_replace('{{useSoftDeletes}}', "use Illuminate\Database\Eloquent\SoftDeletes;\n", $stub);
         } else {

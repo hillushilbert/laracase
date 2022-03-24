@@ -44,9 +44,9 @@ class CrudApiControllerCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return config('crudgenerator.custom_template')
-        ? config('crudgenerator.path') . '/controller.stub'
-        : __DIR__ . '/../stubs/api-controller.stub';
+        return config('laracase.custom_template')
+        ? config('laracase.path') . '/controller.stub'
+        : __DIR__ . '/../../resources/stubs/api-controller.stub';
     }
 
     /**
