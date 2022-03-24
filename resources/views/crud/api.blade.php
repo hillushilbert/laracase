@@ -1,20 +1,12 @@
-@extends('layouts.page')
+@extends('laracase::layouts.app')
 
 @section('title', 'CRUD API')
 
 @section('sidebar')
-	@include('layouts.menu')
+	@include('laracase::layouts.menu')
 @endsection
 
 @section('content')
-	
-	@if(session('error'))	
-    @include('layouts.error', ['error' =>  session('error')])
-	@endif
-	
-	@if(session('success'))	
-    @include('layouts.success', ['success' =>  session('success')])
-	@endif	
 	
 	<div class="container">
         <div class="row">
@@ -34,10 +26,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/crud/createApi') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('laracase.crud.api.storage') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('crud.form', ['formMode' => 'create'])
+                            @include ('laracase::crud.form', ['formMode' => 'create'])
 
                         </form>
 
@@ -79,7 +71,7 @@ $(document).ready(function(){
 	
 	$('#fld_tabela').change(function(){
 		$.ajax({
-		  url: "/crud/create/"+$(this).val()+'/ajax',
+		  url: "/laracase/crud/create/"+$(this).val()+'/ajax',
 		  dataType: 'html',
 		  beforeSend: function( xhr ) {
 			//xhr.overrideMimeType( "text/plain; charset=x-user-defined" );

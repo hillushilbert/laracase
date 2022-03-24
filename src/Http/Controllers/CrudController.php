@@ -21,7 +21,7 @@ class CrudController extends Controller
 			$ajax = Hillus\Laracase\Http\Helpers\View::grid(session('tabela'),'form');
 		}
 		
-		return view('crud.new', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
+		return view('laracase::crud.new', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
 	}
 	
 	public function api(Request $request){
@@ -33,7 +33,7 @@ class CrudController extends Controller
 			$ajax = Hillus\Laracase\Http\Helpers\View::grid(session('tabela'),'api');
 		}
 		
-		return view('crud.api', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
+		return view('laracase::crud.api', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
 	}	
 	
 	
@@ -46,7 +46,7 @@ class CrudController extends Controller
 			$ajax = Hillus\Laracase\Http\Helpers\View::grid(session('tabela'),'grid');
 		}
 		
-		return view('crud.grid.index', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
+		return view('laracase::crud.grid.index', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
 	}	
 		
 	

@@ -1,10 +1,10 @@
-@extends('adminlte::page')
+@extends('laracase::layouts.app')
 
-@section('title', 'AdminLTE')
+@section('title', 'CRUD API')
 
-@section('content_header')
-
-@stop
+@section('sidebar')
+	@include('laracase::layouts.menu')
+@endsection
 
 @section('content')
 	
@@ -30,10 +30,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/crud/create') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('laracase.crud.new') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('crud.form.form', ['formMode' => 'create'])
+                            @include ('laracase::crud.form.form', ['formMode' => 'create'])
 
                         </form>
 
@@ -111,7 +111,7 @@ $(document).ready(function(){
 	
 	$('#fld_tabela').change(function(){
 		$.ajax({
-		  url: "/crud/create/"+$(this).val()+'/ajax?modulo=form',
+		  url: "/laracase/crud/create/"+$(this).val()+'/ajax?modulo=form',
 		  dataType: 'html',
 		  beforeSend: function( xhr ) {
 			//xhr.overrideMimeType( "text/plain; charset=x-user-defined" );

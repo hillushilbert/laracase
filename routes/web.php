@@ -9,5 +9,5 @@ use Hillus\Laracase\Http\Controllers\CrudController;
     Route::post('/crud/create', [CrudController::class, 'storage']);
     Route::get('/crud/create/{tabela}/ajax', [CrudController::class, 'ajax']);
 
-    Route::post('/crud/createGrid', [CrudController::class, 'storageGrid']);
-    Route::post('/crud/createApi', [CrudController::class, 'storageApi']);
+    Route::post('/crud/createGrid', [CrudController::class, 'storageGrid'])->name('crud.grid.storage');
+    Route::post('/crud/createApi', [CrudController::class, 'storageApi'])->name('crud.api.storage');
