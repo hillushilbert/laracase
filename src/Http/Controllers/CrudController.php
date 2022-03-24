@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\TableMetaCrud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use LaracaseView as LaracaseView;
+use Hillus\Laracase\Http\Helpers\View as LaracaseView;
 
 class CrudController extends Controller
 {   
