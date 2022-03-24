@@ -17,7 +17,7 @@ class View
 					  'double','float','enum','select','radio','checkbox','Sim/Não',
 					  'Ativo/Inativo','Sexo','Estados','readonly'];
 					  
-			$return = $return .= view('crud.'.$modulo.'.header_grid', [])->render();
+			$return = $return .= view('laracase::crud.'.$modulo.'.header_grid', [])->render();
 			$colunas = DB::select('SHOW COLUMNS FROM '.$tabela);
 			
 			foreach($colunas as $idx=>$col){
@@ -40,7 +40,7 @@ class View
 				$params['readonly']  = 'N';
 				$params['gridFields']  = [];
 				$params['searchFields']  = [];
-				$return .= view('crud.'.$modulo.'.linha_grid', $params)->render();			
+				$return .= view('laracase::crud.'.$modulo.'.linha_grid', $params)->render();			
 			}
 	
 		}catch(\Exception $e){
