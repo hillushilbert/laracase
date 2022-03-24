@@ -8,22 +8,15 @@
 
 @section('content')
 	
-	@if(session('error'))	
-    @include('layouts.error', ['error' =>  session('error')])
-	@endif
 	
-	@if(session('success'))	
-    @include('layouts.success', ['success' =>  session('success')])
-	@endif	
-	
-	<div class="container-fluid">
+	<div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header">
-						<h3 class="box-title">Create New Grid Datatable</h3>
+                <div class="card">
+                    <div class="card-header">
+						<h3 class="card-title">Create New Grid Datatable</h3>
 					</div>
-                    <div class="box-body">
+                    <div class="card-body">
                         <br />
 
                         @if ($errors->any())
@@ -37,7 +30,7 @@
                         <form method="POST" action="{{ url('/crud/createGrid') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('crud.grid.form', ['formMode' => 'grid'])
+                            @include ('laracase::crud.grid.form', ['formMode' => 'grid'])
 
                         </form>
 
@@ -46,7 +39,7 @@
             </div>
         </div>
 	</div>
-	@include ('crud.grid.modalSelect')
+	@include ('laracase::crud.grid.modalSelect')
 
 @endsection
 

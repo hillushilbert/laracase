@@ -12,12 +12,12 @@
     @include('layouts.success', ['success' =>  session('success')])
 	@endif	
 	
-	<div class="container-full">
+	<div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header">Create New Fluxo</div>
-                    <div class="box-body">
+                <div class="card card-primary">
+                    <div class="card-header">Create New Fluxo</div>
+                    <div class="card-body">
                         @if ($errors->any())
                             <ul class="alert alert-danger">
                                 @foreach ($errors->all() as $error)
