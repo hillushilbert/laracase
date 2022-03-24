@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\TableMetaCrud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Hillus\Laracase\Http\Helpers\View as LaracaseView;
+use Hillus\Laracase\Http\Helpers\View;
 
 class CrudController extends Controller
 {   
@@ -19,7 +19,7 @@ class CrudController extends Controller
 		$column = 'Tables_in_'.env('DB_DATABASE');
 		$ajax = '';
 		if(!empty(session('tabela'))){
-			$ajax = LaracaseView::grid(session('tabela'),'form');
+			$ajax = View::grid(session('tabela'),'form');
 		}
 		
 		return view('laracase::crud.new', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
@@ -31,7 +31,7 @@ class CrudController extends Controller
 		$column = 'Tables_in_'.env('DB_DATABASE');
 		$ajax = '';
 		if(!empty(session('tabela'))){
-			$ajax = LaracaseView::grid(session('tabela'),'api');
+			$ajax = View::grid(session('tabela'),'api');
 		}
 		
 		return view('laracase::crud.api', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
@@ -44,7 +44,7 @@ class CrudController extends Controller
 		$column = 'Tables_in_'.env('DB_DATABASE');
 		$ajax = '';
 		if(!empty(session('tabela'))){
-			$ajax = LaracaseView::grid(session('tabela'),'grid');
+			$ajax = View::grid(session('tabela'),'grid');
 		}
 		
 		return view('laracase::crud.grid.index', ['tabelas'=>$tables, 'column'=>$column, 'ajax'=>$ajax]);
@@ -62,7 +62,7 @@ class CrudController extends Controller
 		try
 		{
 			$modulo = $request->input('modulo',false);
-			$return = LaracaseView::grid($tabela,$modulo);
+			$return = View::grid($tabela,$modulo);
 		}catch(\Exception $e){
 			$return = $e->getMessage();
 		}
@@ -127,7 +127,7 @@ class CrudController extends Controller
 				if(!in_array($col->Field,$fields)) continue;
 				$f = new \stdClass;
 				$f->name  = $col->Field;
-				$f->type  = !empty($types[$col->Field])  ? $types[$col->Field] : LaracaseView::deparaType($col->Type);
+				$f->type  = !empty($types[$col->Field])  ? $types[$col->Field] : View::deparaType($col->Type);
 				$f->title = !empty($labels[$col->Field]) ? $labels[$col->Field] : $col->Field;
 				$f->readonly = '';
 				

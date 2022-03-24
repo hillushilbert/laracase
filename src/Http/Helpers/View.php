@@ -1,6 +1,7 @@
 <?php
 
 namespace Hillus\Laracase\Http\Helpers;
+
 use Illuminate\Support\Facades\DB;
 
 class View 
