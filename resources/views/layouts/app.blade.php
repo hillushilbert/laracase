@@ -60,10 +60,8 @@
 <body>
     <div id="app">
 
-        @if(Auth::check())
-
         @include('layouts.menu')
-        @endif
+
         <main class="py-4">
             @yield('content')
         </main>

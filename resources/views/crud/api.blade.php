@@ -2,10 +2,6 @@
 
 @section('title', 'CRUD API')
 
-@section('sidebar')
-	@include('laracase::layouts.menu')
-@endsection
-
 @section('content')
 	
 	<div class="container">

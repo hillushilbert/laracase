@@ -2,10 +2,6 @@
 
 @section('title', 'CRUD API')
 
-@section('sidebar')
-	@include('laracase::layouts.menu')
-@endsection
-
 @section('content')
 	
 	@if(session('error'))	
@@ -81,7 +77,7 @@
 	
 @endsection
 
-@section('adminlte_js')
+@section('addJs')
 <script>
 var fieldName = null;
 
