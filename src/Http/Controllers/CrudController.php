@@ -3,7 +3,7 @@
 namespace Hillus\Laracase\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Helpers\TableMetaCrud;
+use Hillus\Laracase\Http\Helpers\TableMetaCrud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Hillus\Laracase\Http\Helpers\View;
