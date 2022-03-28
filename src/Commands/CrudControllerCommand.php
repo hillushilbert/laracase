@@ -164,7 +164,7 @@ EOD;
                 }           
             }
 
-            $whereSnippet .= "->";
+            // $whereSnippet .= "->";
         }
 		
 		$compactLookups = '';

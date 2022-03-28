@@ -23,13 +23,14 @@ class DummyClass extends Controller
     {
         $keyword = $request->get('search');
         $perPage = {{pagination}};
-
+        $query = new {{modelName}};
+        
         if (!empty($keyword)) {
-            ${{crudName}} = {{modelName}}::{{whereSnippet}}paginate($perPage);
-        } else {
-            ${{crudName}} = {{modelName}}::paginate($perPage);
+            $query = $query->{{whereSnippet}};
         }
 		
+        ${{crudName}} = $query->paginate($perPage);
+
         return view('{{viewPath}}{{viewName}}.index', compact('{{crudName}}'));
     }
 
@@ -61,7 +62,7 @@ class DummyClass extends Controller
         {{updateAt}}
         {{modelName}}::create($requestData);
         
-        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} adicionado!');
+        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', 'Adicionado com sucesso!');
     }
 
     /**
@@ -110,7 +111,7 @@ class DummyClass extends Controller
         ${{crudNameSingular}}->update($requestData);
         
 
-        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} atualizado!');
+        return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', 'Atualizado com sucesso!');
     }
 
     /**
@@ -127,7 +128,7 @@ class DummyClass extends Controller
 		{
 			{{modelName}}::destroy($id);
 			
-			return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', '{{modelName}} removido!');
+			return redirect('{{routeGroup}}{{viewName}}')->with('flash_message', 'Removido com sucesso!');
 		
 		}
 		catch(\Exception $e)
