@@ -72,7 +72,7 @@ $(document).ready(function(){
 	
 	$('#fld_tabela').change(function(){
 		$.ajax({
-		  url: "/crud/create/"+$(this).val()+'/ajax?modulo=grid',
+		  url: "/laracase/crud/create/"+$(this).val()+'/ajax?modulo=grid',
 		  dataType: 'html',
 		  beforeSend: function( xhr ) {
 			//xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
