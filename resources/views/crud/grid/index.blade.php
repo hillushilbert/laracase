@@ -27,7 +27,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/crud/createGrid') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('laracase.crud.grid.storage') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @include ('laracase::crud.grid.form', ['formMode' => 'grid'])

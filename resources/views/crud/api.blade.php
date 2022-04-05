@@ -1,4 +1,4 @@
-@extends('laracase::layouts.app')
+@extends('adminlte::page')
 
 @section('title', 'CRUD API')
 
@@ -37,7 +37,7 @@
 	
 @endsection
 
-@section('addJs')
+@section('adminlte_js')
 <script>
 var fieldName = null;
 

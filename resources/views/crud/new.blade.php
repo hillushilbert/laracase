@@ -1,4 +1,4 @@
-@extends('laracase::layouts.app')
+@extends('adminlte::page')
 
 @section('title', 'CRUD API')
 
@@ -36,7 +36,8 @@
             </div>
         </div>
     </div>
-	
+	@include ('laracase::crud.grid.modalSelect')
+	<!--
 	<div id="meuModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-xl">
 		<div class="modal-content">
@@ -69,10 +70,10 @@
 		</div>
 	  </div>
 	</div>
-	
+-->
 @endsection
 
-@section('addJs')
+@section('adminlte_js')
 <script>
 var fieldName = null;
 
