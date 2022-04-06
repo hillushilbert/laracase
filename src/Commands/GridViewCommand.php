@@ -292,7 +292,7 @@ class GridViewCommand extends Command
         $formHelper = $this->option('form-helper');
 		$this->viewDirectoryPath = config('laracase.custom_template')
             ? config('laracase.path') . 'views/' . $formHelper . '/'
-            : __DIR__ . '/../stubs/views/' . $formHelper . '/';
+            : __DIR__ . '/../../resources/stubs/views/' . $formHelper . '/';
 
 
         $this->crudName = strtolower($this->argument('name'));
